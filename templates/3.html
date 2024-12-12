@@ -1,55 +1,82 @@
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>🥳Swing your mood and We'll sing a Song for you</title>
-        <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
-        <link href="static/css/style.css" rel="stylesheet">
-        <link href="{{url_for('static', filename='images/favicon.png')}}" rel="icon" type="image/x-icon">
-        <script defer src="static/js/face-api.min.js"></script>
-        <script defer src="static/js/musicjs.js"></script>
-        <script defer src="static/js/faceapi.js"></script>
-        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/vibrant.js/1.0.0/Vibrant.min.js"></script>
 
-        <style>
-            .emotions-roll{
-                background-image: url('static/images/emotions.jpg');
-            }
-        </style>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🥳Swing your mood and We'll sing a Song for you</title>
+    <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+    <link href="static/css/style.css" rel="stylesheet">
+    <link href="{{url_for('static', filename='images/favicon.png')}}" rel="icon" type="image/x-icon">
+    <script defer src="static/js/face-api.min.js"></script>
+    <script defer src="static/js/musicjs.js"></script>
+    <script defer src="static/js/faceapi.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/vibrant.js/1.0.0/Vibrant.min.js"></script>
 
-    <body>
-        <nav>
-            <p class="logo">WeAreMoody.</p>
-            <form class="search" onsubmit="event.preventDefault(); searchFeature();">
-                <input type="search" id="search-bar" placeholder="Have a particular song in mind?">
-            </form>
-        </nav>
+    <style>
+        .emotions-roll {
+            background-image: url('static/images/emotions.jpg');
+        }
+    </style>
+</head>
 
-        <div id="clicked-photo">
-            <img id="photograph" src=""><img id="face-box" src="">
-        </div>
+<body>
+    <nav>
+        <p class="logo">WeAreMoody.</p>
+        <form class="search" onsubmit="event.preventDefault(); searchFeature();">
+            <input type="search" id="search-bar" placeholder="Have a particular song in mind?">
+            <svg id="search-in-progress" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'>
+                <radialGradient id='l1' cx='.66' fx='.66' cy='.3125' fy='.3125' gradientTransform='scale(1.5)'>
+                    <stop offset='0' stop-color='#fff'></stop>
+                    <stop offset='.3' stop-color='#fff' stop-opacity='.9'></stop>
+                    <stop offset='.6' stop-color='#fff' stop-opacity='.6'></stop>
+                    <stop offset='.8' stop-color='#fff' stop-opacity='.3'></stop>
+                    <stop offset='1' stop-color='#fff' stop-opacity='0'></stop>
+                </radialGradient>
+                <circle transform-origin='center' fill='none' stroke='url(#l1)' stroke-width='15' stroke-linecap='round'
+                    stroke-dasharray='200 1000' stroke-dashoffset='0' cx='100' cy='100' r='70'>
+                    <animateTransform type='rotate' attributeName='transform' calcMode='spline' dur='2' values='360;0'
+                        keyTimes='0;1' keySplines='0 0 1 1' repeatCount='indefinite'></animateTransform>
+                </circle>
+                <circle transform-origin='center' fill='none' opacity='.2' stroke='#fff' stroke-width='15'
+                    stroke-linecap='round' cx='100' cy='100' r='70'></circle>
+            </svg>
 
-        <svg style="display: none">
-            <symbol id="arrow-right" viewBox="0 0 20 10">
-                <path d="M14.84 0l-1.08 1.06 3.3 3.2H0v1.49h17.05l-3.3 3.2L14.84 10 20 5l-5.16-5z"></path>
-            </symbol>
-            <filter id="noiseFilter">
-                <feTurbulence type="fractalNoise" baseFrequency="1.8" numOctaves="6" stitchTiles="stitch"></feTurbulence>
-            </filter>
-        </svg>
+        </form>
+    </nav>
 
-        <div id="panels" onclick="snap()" style="position: relative; width: 100%; display: flex; flex-direction: row;  flex-wrap: wrap; margin-top: -10px;" >
+    <div id="clicked-photo">
+        <img id="photograph" src=""><img id="face-box" src="">
+    </div>
 
-            <!-- ML Model Emotion Recognition -->
-            <div class="left-panel" style="flex: 1; display: flex; gap: 5%; flex-direction: column; justify-content: center; place-items: center; height: 100vh; margin: 10px 5px 10px 10px; background: #121212; border-radius: 10px; overflow: hidden;">
-                <div name="video" class="ad-border-rotate" style="width: 85%; display: flex;justify-content: center; place-items: center; max-width: 600px; height: auto; aspect-ratio: 16/11; position: relative;  position: relative;" >
-                    <div class="gradient" style="width: 100%; height: auto; max-width: 450px; z-index: 1; border-radius: 20px;aspect-ratio: 16/11; overflow:hidden; position:relative;" id="video-container">
-                        <video id="video" width="480px" height="450px" autoplay muted></video>
-                    </div>
+    <svg style="display: none">
+        <symbol id="arrow-right" viewBox="0 0 20 10">
+            <path d="M14.84 0l-1.08 1.06 3.3 3.2H0v1.49h17.05l-3.3 3.2L14.84 10 20 5l-5.16-5z"></path>
+        </symbol>
+        <filter id="noiseFilter">
+            <feTurbulence type="fractalNoise" baseFrequency="1.8" numOctaves="6" stitchTiles="stitch"></feTurbulence>
+        </filter>
+    </svg>
 
-                    <div class="camera-toggle" onclick="cameraONOFF('auto')">
-                        <svg fill="#ffffff" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800px" height="800px" viewBox="0 0 487.811 487.811" xml:space="preserve"><g><g><polygon points="0,124.814 0,124.814 0,124.805"/><path d="M487.592,118.178l-1.425-1.521c-0.794-0.851-2.247-1.874-4.657-1.874l-77.169,0.067c-2.229,0-7.43-6.101-9.209-11.733
+    <div id="panels" onclick="snap()"
+        style="position: relative; width: 100%; display: flex; flex-direction: row;  flex-wrap: wrap; margin-top: -10px;">
+
+        <!-- ML Model Emotion Recognition -->
+        <div class="left-panel"
+            style="flex: 1; display: flex; gap: 5%; flex-direction: column; justify-content: center; place-items: center; height: 100vh; margin: 10px 5px 10px 10px; background: #121212; border-radius: 10px; overflow: hidden;">
+            <div name="video" style="width: 85%; display: flex;justify-content: center; place-items: center; max-width: 600px; height: auto; aspect-ratio: 16/11; position: relative;  position: relative;">
+                <div class="gradient" style="width: 100%; height: auto; max-width: 450px; z-index: 1; border-radius: 20px;aspect-ratio: 16/11; overflow:hidden; position:relative;"
+                    id="video-container">
+                    <video id="video" width="480px" height="450px" autoplay muted></video>
+                </div>
+
+                <div class="camera-toggle" onclick="cameraONOFF('auto')">
+                    <svg fill="#ffffff" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" width="800px" height="800px"
+                        viewBox="0 0 487.811 487.811" xml:space="preserve">
+                        <g>
+                            <g>
+                                <polygon points="0,124.814 0,124.814 0,124.805" />
+                                <path d="M487.592,118.178l-1.425-1.521c-0.794-0.851-2.247-1.874-4.657-1.874l-77.169,0.067c-2.229,0-7.43-6.101-9.209-11.733
 			l-16.639-47.392c-2.477-7.889-10.49-7.889-13.502-7.889l-181.238,0.077l-3.691-0.029c-3.825,0-12.785,0-15.195,8.319
 			l-14.564,51.102c-1.1,3.806-5.508,7.545-8.902,7.545l-121.473-0.019c-7.449,0-19.918,0-19.928,9.974
 			c0.01-5.69,14.563-0.517,24.604-0.411l116.796,0.019c5.852,0,11.886-6.655,13.493-12.192l14.563-52.316
@@ -63,82 +90,99 @@
 			C478.105,413.172,478.135,414.5,478.173,415.982z M404.341,124.413L404.341,124.413
 			C404.341,124.413,404.331,124.413,404.341,124.413L404.341,124.413z M274.922,148.319c59.412,0,107.578,48.167,107.578,107.578
 			c0,59.412-48.166,107.578-107.578,107.578c-59.412,0-107.578-48.166-107.578-107.578
-			C167.344,196.485,215.51,148.319,274.922,148.319z"/></g></g></svg>
-                    </div>
-                    
+			C167.344,196.485,215.51,148.319,274.922,148.319z" />
+                            </g>
+                        </g>
+                    </svg>
                 </div>
 
-                <p id="recommendation-note"></p>
-                <div class="recommend-button" onclick="recommend()"><div><p>Recommend a Song</p></div></div>
-                
             </div>
-        
-            <!-- Main Player -->
-            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; place-items: center; margin: 10px 10px 10px 5px; overflow:hidden; background-image: radial-gradient(circle at top, #fff, #121212 40%); background-position: top center; border-radius: 10px;">
-                <!-- Playing Card -->
-                <div class="player">
-                        <img src="static/images/transparent.png" alt="Song Artwork">
-                    <div name="mainsong metadata" class="current-song-detail">
-                        <div style="flex: 1;">
-                            <button class="play-button" onclick="togglePlay();"><div style="transform: translate(5%,-5%);">▶</div></button>
-                        </div>
-                        <div style="flex: 1;">
-                            <div><h2>Song Title</h2></div>
-                            <div><p>Artist Name</p></div>
-                        </div>
-                    </div> 
-                    <div class="slide-container" style="width: 90%; justify-content: center; place-items: center;">
-                        <input type="range" onchange="updateSlider(1)" class="slider button" id="music-slider" min="0"  max="100" value="0" />
-                    </div>  
-                </div>
-                <br>
-                
 
-                <!-- Similar Songs Cards -->
-                 <p style="font-size: min(8vw, 30px); font-family: open sans; padding: 5% 0% 2% 0%;">Similar Songs</p>
-                 <div class="similar-songs" style="overflow-y: hidden; overflow-x: auto; width: 100%;  height: auto; max-width: 450px; aspect-ratio: 16/19; ">
-                    <div>
-                        <div class="song-card" id="similar1" onclick="similarsongclick('#similar1');">
-                            <div class="thumb">
-                                <img src="static/images/transparent.png" alt="Song 1">
-                            </div>
-                            <div>
-                                <h3>Song Title 1</h3>
-                                <p>Artist Name</p>
-                            </div>
-                            <div class="similar-song-play button">
-                                <div style="transform: translateX(5%); font-size: 130%; color:white;">▶</div>
-                            </div>
-                        </div>
-                        <div class="song-card button" id="similar2" onclick="similarsongclick('#similar2');">
-                            <div class="thumb">
-                                <img src="static/images/transparent.png" alt="Song 1">
-                            </div>
-                            <div>
-                                <h3>Song Title 2</h3>
-                                <p>Artist Name</p>
-                            </div>
-                            <div class="similar-song-play button">
-                                <div style="transform: translateX(5%);font-size: 130%; color:white;">▶</div>
-                            </div>
-                        </div>
-                        <div class="song-card button" id="similar3" onclick="similarsongclick('#similar3')">
-                            <div class="thumb">
-                                <img src="static/images/transparent.png" alt="Song 1">
-                            </div>
-                            <div>
-                                <h3>Song Title 3</h3>
-                                <p>Artist Name</p>
-                            </div>
-                            <div class="similar-song-play button">
-                                <div style="transform: translateX(5%); font-size: 130%; color:white;">▶</div>
-                            </div>
-                        </div>
-                    </div>
-                 </div>
-                
-                
+            <p id="recommendation-note"></p>
+            <div class="recommend-button" onclick="recommend()">
+                <div>
+                    <p>Recommend a Song</p>
+                </div>
             </div>
+
         </div>
-    </body>
+
+        <!-- Main Player -->
+        <div
+            style="flex: 1; display: flex; flex-direction: column; justify-content: center; place-items: center; margin: 10px 10px 10px 5px; overflow:hidden; background-image: radial-gradient(circle at top, #fff, #121212 40%); background-position: top center; border-radius: 10px;">
+            <!-- Playing Card -->
+            <div class="player">
+                <img src="static/images/transparent.png" alt="Song Artwork">
+                <div name="mainsong metadata" class="current-song-detail">
+                    <div style="flex: 1;">
+                        <button class="play-button" onclick="togglePlay();">
+                            <div style="transform: translate(5%,-5%);">▶</div>
+                        </button>
+                    </div>
+                    <div style="flex: 1;">
+                        <div>
+                            <h2>Song Title</h2>
+                        </div>
+                        <div>
+                            <p>Artist Name</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-container" style="width: 90%; justify-content: center; place-items: center;">
+                    <input type="range" onchange="updateSlider('update')" class="slider button" id="music-slider"
+                        min="0" max="100" value="0" />
+                </div>
+            </div>
+            <br>
+
+
+            <!-- Similar Songs Cards -->
+            <p style="font-size: min(8vw, 30px); font-family: open sans; padding: 5% 0% 2% 0%;">Similar Songs</p>
+            <div class="similar-songs"
+                style="overflow-y: hidden; overflow-x: auto; width: 100%;  height: auto; max-width: 450px; aspect-ratio: 16/19; ">
+                <div>
+                    <div class="song-card" id="similar1" onclick="similarsongclick('#similar1');">
+                        <div class="thumb">
+                            <img src="static/images/transparent.png" alt="Song 1">
+                        </div>
+                        <div>
+                            <h3>Song Title 1</h3>
+                            <p>Artist Name</p>
+                        </div>
+                        <div class="similar-song-play button">
+                            <div style="transform: translateX(5%); font-size: 130%; color:white;">▶</div>
+                        </div>
+                    </div>
+                    <div class="song-card button" id="similar2" onclick="similarsongclick('#similar2');">
+                        <div class="thumb">
+                            <img src="static/images/transparent.png" alt="Song 1">
+                        </div>
+                        <div>
+                            <h3>Song Title 2</h3>
+                            <p>Artist Name</p>
+                        </div>
+                        <div class="similar-song-play button">
+                            <div style="transform: translateX(5%);font-size: 130%; color:white;">▶</div>
+                        </div>
+                    </div>
+                    <div class="song-card button" id="similar3" onclick="similarsongclick('#similar3')">
+                        <div class="thumb">
+                            <img src="static/images/transparent.png" alt="Song 1">
+                        </div>
+                        <div>
+                            <h3>Song Title 3</h3>
+                            <p>Artist Name</p>
+                        </div>
+                        <div class="similar-song-play button">
+                            <div style="transform: translateX(5%); font-size: 130%; color:white;">▶</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</body>
+
 </html>

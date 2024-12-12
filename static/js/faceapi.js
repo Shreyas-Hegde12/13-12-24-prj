@@ -1,6 +1,6 @@
 const video = document.getElementById('video')
 const sampler = document.querySelector('.start-sampling');
-let watchState = true;
+let inView = true;
 let cooldowntime = false;
 let dominantExpression = 'starter';
 
@@ -26,7 +26,10 @@ function startVideo() {
   )
 }
 
+let firstvideoplay=true;
 video.addEventListener('play', () => {
+  if(!firstvideoplay)
+    return;
   const canvas = faceapi.createCanvasFromMedia(video);
   canvas.setAttribute('class','canvas-photo');
   document.querySelector('#video-container').append(canvas);
@@ -34,10 +37,8 @@ video.addEventListener('play', () => {
   const displaySize = { width: video.width, height: video.height };
   faceapi.matchDimensions(canvas, displaySize);
 
-  //sampler.style.display = 'none';
-
   setInterval(async () => {
-    if (watchState == true && cooldowntime == false) {
+    if (inView == true && cooldowntime == false && video.paused == false) {
       // Detect the face with expressions
       const detections = await faceapi.detectSingleFace(video, new faceapi.TinyFaceDetectorOptions()).withFaceExpressions();
       
@@ -74,12 +75,13 @@ video.addEventListener('play', () => {
         ctx.fillText(`${emoji[dominantExpression]} : ${confidence}%`, box.x + 10, box.y + 20);
       }
     }
-  }, 100);
+  }, 200);
   document.querySelector('#video-container').classList.add('smooth-transition');
   const a = setTimeout(function(){
     document.querySelector('#video-container').classList.remove('gradient'); 
     document.querySelector('.camera-toggle').style.transform = 'scale(1)'; 
     document.querySelector('#video-container').style.maxWidth = '600px';},2e3);
+  firstvideoplay = false;
   
 });
 
@@ -92,12 +94,12 @@ function handleIntersection(entries) {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       // Element is in view
-      watchState = true;
-      console.log('Element is in view:', watchState);
+      inView = true;
+      console.log('Element is in view:', inView);
     } else {
       // Element is out of view
-      watchState = false;
-      console.log('Element is out of view:', watchState);
+      inView = false;
+      console.log('Element is out of view:', inView);
     }
   });
 }
@@ -136,7 +138,7 @@ function recommend(){
   fetchSongOnEmotion(dominantExpression);
   cooldown(0);
   generatePhoto();
-  updateSlider(0);
+  updateSlider('reset');
   throwPhoto();
 }
 
