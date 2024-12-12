@@ -101,7 +101,7 @@ SAD = [
     ['Tujh Mein Rab Dikhta Hai', 'a romantic melody s'],
     ['Kanave Unai', 'a feeling song s'],
     ['Nee Thoreda Ghaligeyali', 'a feeling song s'],
-    ['Mosa Madalendu Neenu', 'a feeling song s'],
+    ['Mosa Madalendu Neenu', 'a feeling song s']
 ]
 
 
