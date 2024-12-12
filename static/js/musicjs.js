@@ -6,7 +6,8 @@ const note = {
     'angry': "Ooh! You look angry.. Being happy is still a choice... <br>",
 }
 
-let isPlaying = false;let loading = false;
+let isPlaying = false;
+let loading = false;
 let songFetched = false;
 let audioElement = new Audio();
 const playButton = document.querySelector('.play-button div');
@@ -23,11 +24,10 @@ function togglePlay() {
     playButton.textContent = isPlaying ? '⏸' : '▶';
     if (isPlaying) {
         audioElement.play();
-            video.pause();
+            cameraONOFF('off');
     } else {
         audioElement.pause();
-        if (video.paused)
-            video.play();
+        cameraONOFF('on');
     }
 }
 
@@ -154,7 +154,7 @@ document.getElementById("music-slider").addEventListener("input", () => {
                         audioElement.play();
                         playButton.textContent ='⏸';
                         loading = false;
-                        cameraONOFF();
+                        cameraONOFF('off');
                     }
                     setTimeout(()=>{updateSlider(0);},1e3);
                 }).catch(error => {
@@ -188,7 +188,7 @@ document.getElementById("music-slider").addEventListener("input", () => {
 
         }
 
-        const camonsvg = `<svg fill="#ffffff" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800px" height="800px" viewBox="0 0 487.811 487.811" xml:space="preserve"><g><g><polygon points="0,124.814 0,124.814 0,124.805"/><path d="M487.592,118.178l-1.425-1.521c-0.794-0.851-2.247-1.874-4.657-1.874l-77.169,0.067c-2.229,0-7.43-6.101-9.209-11.733
+        var camonsvg = `<svg fill="#ffffff" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800px" height="800px" viewBox="0 0 487.811 487.811" xml:space="preserve"><g><g><polygon points="0,124.814 0,124.814 0,124.805"/><path d="M487.592,118.178l-1.425-1.521c-0.794-0.851-2.247-1.874-4.657-1.874l-77.169,0.067c-2.229,0-7.43-6.101-9.209-11.733
 			l-16.639-47.392c-2.477-7.889-10.49-7.889-13.502-7.889l-181.238,0.077l-3.691-0.029c-3.825,0-12.785,0-15.195,8.319
 			l-14.564,51.102c-1.1,3.806-5.508,7.545-8.902,7.545l-121.473-0.019c-7.449,0-19.918,0-19.928,9.974
 			c0.01-5.69,14.563-0.517,24.604-0.411l116.796,0.019c5.852,0,11.886-6.655,13.493-12.192l14.563-52.316
@@ -203,18 +203,18 @@ document.getElementById("music-slider").addEventListener("input", () => {
 			C404.341,124.413,404.331,124.413,404.341,124.413L404.341,124.413z M274.922,148.319c59.412,0,107.578,48.167,107.578,107.578
 			c0,59.412-48.166,107.578-107.578,107.578c-59.412,0-107.578-48.166-107.578-107.578
 			C167.344,196.485,215.51,148.319,274.922,148.319z"/></g></g></svg>`;
-        const camoffsvg = `<svg fill="#ffffff" width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 20h11.879l-3.083-3.083A4.774 4.774 0 0 1 12 17c-2.71 0-5-2.29-5-5 0-.271.039-.535.083-.796L2.144 6.265C2.054 6.493 2 6.74 2 7v11c0 1.103.897 2 2 2zM20 5h-2.586l-2.707-2.707A.996.996 0 0 0 14 2h-4a.996.996 0 0 0-.707.293L6.586 5h-.172L3.707 2.293 2.293 3.707l18 18 1.414-1.414-.626-.626A1.98 1.98 0 0 0 22 18V7c0-1.103-.897-2-2-2zm-5.312 8.274A2.86 2.86 0 0 0 15 12c0-1.626-1.374-3-3-3-.456 0-.884.12-1.274.312l-1.46-1.46A4.88 4.88 0 0 1 12 7c2.71 0 5 2.29 5 5a4.88 4.88 0 0 1-.852 2.734l-1.46-1.46z"/></svg>`;
+        var camoffsvg = `<svg fill="#ffffff" width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 20h11.879l-3.083-3.083A4.774 4.774 0 0 1 12 17c-2.71 0-5-2.29-5-5 0-.271.039-.535.083-.796L2.144 6.265C2.054 6.493 2 6.74 2 7v11c0 1.103.897 2 2 2zM20 5h-2.586l-2.707-2.707A.996.996 0 0 0 14 2h-4a.996.996 0 0 0-.707.293L6.586 5h-.172L3.707 2.293 2.293 3.707l18 18 1.414-1.414-.626-.626A1.98 1.98 0 0 0 22 18V7c0-1.103-.897-2-2-2zm-5.312 8.274A2.86 2.86 0 0 0 15 12c0-1.626-1.374-3-3-3-.456 0-.884.12-1.274.312l-1.46-1.46A4.88 4.88 0 0 1 12 7c2.71 0 5 2.29 5 5a4.88 4.88 0 0 1-.852 2.734l-1.46-1.46z"/></svg>`;
 
 
-        function cameraONOFF(){
+        function cameraONOFF(action){
             const tg = document.querySelector('.camera-toggle');
-        if(video.paused){
-            tg.innerHTML = camonsvg;
-            video.play();
-        }else{
-        video.pause();
-        tg.innerHTML = camoffsvg;
-        }
+            if((action=='auto' || action=='on') && video.paused){
+                tg.innerHTML = camonsvg;
+                video.play();
+            }else if((action=='auto' || action=='off')){
+                video.pause();
+                tg.innerHTML = camoffsvg;
+            }
         }
 
         async function searchFeature(){

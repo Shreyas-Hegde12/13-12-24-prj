@@ -111,14 +111,16 @@ const observer = new IntersectionObserver(handleIntersection, {
 // Start observing the target element
 observer.observe(video);
 
-
+let cool;
 //button click cooldown
 function cooldown(bool){
+  if(bool==0){
   cooldowntime=true;
-  const cool = setTimeout(function(){cooldowntime=false; if(video.paused){video.play();}},5e3);
-
+  cameraONOFF('off');
+  cool = setTimeout(function(){cooldowntime=false; cameraONOFF('on');},3e3);
+  }
   if(bool==1){
-    cooldowntime=false; if(video.paused){video.play();}
+    cooldowntime=false; cameraONOFF('on'); if(cool){clearTimeout(cool);}
   }
 }
 
@@ -130,21 +132,12 @@ function setDominantEmotion(expressions) {
 }
 
 function recommend(){
-  cooldown(0);
   if(isPlaying) togglePlay();
   fetchSongOnEmotion(dominantExpression);
+  cooldown(0);
   generatePhoto();
-  video.pause();
   updateSlider(0);
-  document.querySelector('.camera-toggle').style.transform = 'scale(0)';
-  document.querySelector('#video-container').classList.remove('smooth-transition'); 
-  document.querySelector('#video-container').classList.add('gradient');
   throwPhoto();
-  let a = setTimeout(function(){
-    document.querySelector('#video-container').classList.add('smooth-transition');
-    document.querySelector('#video-container').classList.remove('gradient');
-    document.querySelector('.camera-toggle').style.transform = 'scale(1)';
-  },3e3);
 }
 
 function generatePhoto(){
@@ -166,6 +159,16 @@ function generatePhoto(){
 
 function throwPhoto(){
   const photo = document.querySelector('#clicked-photo');
+
+  document.querySelector('.camera-toggle').style.transform = 'scale(0)';
+  document.querySelector('#video-container').classList.remove('smooth-transition'); 
+  document.querySelector('#video-container').classList.add('gradient');
   photo.classList.add('clicked-photo-animation');
-  const r = setTimeout(function(){photo.classList.remove('clicked-photo-animation');},4e3);
+
+  const removeall = setTimeout(function(){
+    photo.classList.remove('clicked-photo-animation');
+    document.querySelector('#video-container').classList.add('smooth-transition');
+    document.querySelector('#video-container').classList.remove('gradient');
+    document.querySelector('.camera-toggle').style.transform = 'scale(1)';
+  },3e3);
 }
