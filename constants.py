@@ -35,22 +35,24 @@ HAPPY = [
 
 
 CALM = [
-    ['samajavaragamana', 'a calm melody'],
-    ['Munjaane Manjali', 'a song to vibe'],
-    ['Neele Neele Ambar Par Male Version', 'an old hit'],
     ['Mayavi', 'a song to vibe'],
+    ['Sanjit Hegde Nee Nanage Allava','a calm melody'],
     ['Ninna Gungalli', 'a calm song to vibe'],
-    ['srivali', 'a sweet melody'],
     ['Zara Zara - lofi', 'a calm lofi'],
+    ['Hallu jenu', 'an old hit'],
+    ['Pal Pal Dil Ke Paas (From Blackmail)','a Kishore Kumar melody'],
+    ['Ninna Ninna Snehake', 'an old hit'],
+    ['Neele Neele Ambar Par Male Version', 'an old hit'],
     ['Baani Gondu Elle', 'an old hit'],
+    ['Munjaane Manjali', 'a song to vibe'],
     ['Let me down slowly', 'a calm song to vibe'],
     ['Nee Sannihake Bandre', 'a calm melody'],
+    ['samajavaragamana', 'a calm melody'],
+    ['srivali', 'a sweet melody'],
     ['Minchagi Neenu', 'a calm melody'],
     ['yeh sham mastani', 'an old hit'],
     ['Tum itna jo muskura rahe ho arth - live', 'an old hit'],
     ['Ninna Danigaagi', 'a calming song to vibe'],
-    ['Hallu jenu', 'an old hit'],
-    ['Ninna Ninna Snehake', 'an old hit'],
     ['Jab Tak', 'a song to vibe'],
     ['Janam Janam', 'a song to vibe'],
     ['Tere Liye', 'an old hit'],
@@ -84,7 +86,7 @@ ANGER = [
 ]
 
 SAD = [
-    ['Yenagali', 'a motivational melody'],
+    ['Yenagali Munde Saagu Nee', 'a motivational melody'],
     ['Olithu Maadu Manusa-C Ashwath', 'a motivational melody'],
     ['Happy-allok', 'a motivational track'],
     ['Kaun Tujhe', 'a feeling song s'],

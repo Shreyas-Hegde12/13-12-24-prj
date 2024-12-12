@@ -3,7 +3,7 @@ from yt_dlp import YoutubeDL
 import asyncio
 from scrape import emotion_query
 
-ytmusic = YTMusic('browser.json')
+ytmusic = YTMusic()
 songnote = ''
 
 def get_song_recommendation(emotion):
@@ -50,6 +50,7 @@ def fetch_related_songs(video_id, songartists):
         "similar2": format_track(similar_tracks[1]),
         "similar3": format_track(similar_tracks[2])
     }
+
 
 def format_track(track):
     if not track:

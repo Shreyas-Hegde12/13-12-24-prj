@@ -2,6 +2,7 @@
     margin:0px;
     padding:0px;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 button{
     cursor: pointer;
@@ -229,8 +230,8 @@ to{background-position: 0% 100%;}
     transform: scale(0);
     transition: transform 0.5s linear;
     position:absolute;
-    bottom: -25px;
-    right: -25px;
+    bottom: -20px;
+    right: -20px;
     border: 2px solid white;
     width: 3vw;
     height: 3vw;
@@ -287,13 +288,12 @@ display:flex;
 border-radius: 50px;
 position: relative;
 cursor:pointer;
-
 }
 .recommend-button p{
     font-size: min(6.8vw,22px);
     font-family: 'open sans';
     color: #000;
-    font-weight: normal;
+    font-weight: bold;
 }
 @property --angle{
 syntax: "<angle>";
@@ -311,7 +311,7 @@ top: 50%;
 left: 50%;
 translate: -50% -50%;
 z-index: -1;
-padding: 3px;
+padding: 2px;
 border-radius: 50px;
 animation: 3s spin linear infinite;
 }
@@ -354,7 +354,7 @@ to{
     flex-direction: row;
     gap: 0%;
     width: 90%;
-    margin-bottom: -5%;
+    margin-bottom: 0%;
 }
 .current-song-detail h2{
     font-size: min(5vw, 25px);

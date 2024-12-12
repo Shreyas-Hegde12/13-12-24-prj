@@ -68,9 +68,6 @@ video.addEventListener('play', () => {
         if (dominantExpression == 'fearful'){
           dominantExpression = 'sad';
         }
-        if (dominantExpression == 'neutral' && parseInt(confidence) <100){
-          dominantExpression = 'sad';
-        }
 
         ctx.fillStyle = 'rgba(255, 255, 255, 1)';
         ctx.font = '16px open sans';
