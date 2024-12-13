@@ -241,3 +241,32 @@ async function searchFeature() {
 function snap() {
     window.location.href = '#panels';
 }
+
+async function lyrics(){
+    const idforlyrics = document.querySelector('.player img').getAttribute('data-videoid');
+    const lyrics = await fetch('/songlyrics', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            'videoid': idforlyrics
+        }),
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    }).then(data => {
+        console.log("Received data:", data);
+        document.querySelector('.lyrics-panel p').innerText = data.lyrics;
+    }).catch(error => {
+        console.error("Error fetching similar songs:", error);
+    });
+}
+
+let lyricVisible = false;
+function lyricToggle(){
+if(lyricVisible){document.querySelector('.lyrics-panel').style.display = 'none'; cameraONOFF('on'); lyricVisible = false;}
+else{lyrics(); document.querySelector('.lyrics-panel').style.display = 'flex'; cameraONOFF('off'); lyricVisible=true;}
+}

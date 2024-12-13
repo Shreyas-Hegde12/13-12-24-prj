@@ -72,13 +72,18 @@
                 </div>
             </div>
 
+            <!--Lyrics Tab-->
+            <div class="lyrics-panel">
+                <p>Fetching Lyrics for you..</p>
+            </div>
+
         </div>
 
         <!-- Music Player - Right Panel -->
         <div class="right-panel">
             <!-- Music Card -->
             <div class="player">
-                <img src="static/images/transparent.png" alt="Song Artwork">
+                <img  onclick="lyricToggle()" src="static/images/transparent.png" alt="Song Artwork">
                 <div name="mainsong metadata" class="current-song-detail">
                     <div style="flex: 1;">
                         <button class="play-button" onclick="togglePlay();">

@@ -75,3 +75,12 @@ async def fetch_song_url(videoid):
     loop = asyncio.get_event_loop()
     with YoutubeDL(ydl_opts) as ydl:
         return await loop.run_in_executor(None, ydl.extract_info, f'https://youtube.com/watch?v={videoid}')
+    
+
+def song_lyrics(videoid):
+    watch_playlist = ytmusic.get_watch_playlist(videoId=videoid)
+    browse_id = watch_playlist.get('lyrics')
+    lyrics = ytmusic.get_lyrics(browse_id)
+    if lyrics.get('lyrics') == 'None':
+        return 'Guess the lyrics yourself'
+    return lyrics.get('lyrics')

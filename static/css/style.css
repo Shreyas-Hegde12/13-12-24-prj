@@ -144,13 +144,14 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 .left-panel, .right-panel{
     flex: 1;
-    min-width: 350px;
+    min-width: 450px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     place-items: center;
     overflow:hidden;
     border-radius: 10px;
+    position: relative;
 }
 .left-panel{
     height: 100vh;
@@ -304,6 +305,21 @@ canvas{
     to{
         --angle: 360deg;
    }
+}
+.lyrics-panel{
+    position: absolute;
+    display: none;
+    top: 0px;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    font-size: min(5vw, 28px);
+    font-family: 'open sans';
+    font-weight: bolder;
+    padding: 10% 8%;
+    color: #fff;
+    background: #1e1e1e;
+    overflow: scroll;
 }
 /* */
 

@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, jsonify
-from musicapi import get_song_recommendation, fetch_related_songs, fetch_song_url, search_song
+from musicapi import get_song_recommendation, fetch_related_songs, fetch_song_url, search_song, song_lyrics
 
 app = Flask(__name__)
 
@@ -68,6 +68,18 @@ def search():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/songlyrics',methods=['POST'])
+def songlyrics():
+    try:
+        data = request.json
+        videoid = data.get('videoid')
+        if not videoid:
+            return jsonify({'error':'We need Videoid to fetch lyrics'}), 400
+        lyrics = song_lyrics(videoid)
+        return jsonify({'lyrics':lyrics}),200
+    
+    except Exception as e:
+        return jsonify({'error':str(e)}), 500
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True, threaded=True)
