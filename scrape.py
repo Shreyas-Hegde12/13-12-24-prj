@@ -25,7 +25,7 @@ def emotion_query(emotion):
     
     no = group_count[emotion]
 
-    if emotion == 'surprised':
+    if emotion == 'surprisd':
         no = random.sample(list(range(0,len(select_group[emotion])-1)),1)
         no = no[0]
         print('no = ',no)

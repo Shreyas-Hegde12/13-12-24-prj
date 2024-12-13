@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def homepage():
-    return render_template('3.html')
+    return render_template('index.html')
 
 
 @app.route('/getsongs', methods=['POST'])

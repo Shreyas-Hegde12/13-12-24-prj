@@ -1,8 +1,15 @@
+/*Universal*/
 *{
     margin:0px;
     padding:0px;
     box-sizing: border-box;
     scroll-behavior: smooth;
+}
+::-webkit-scrollbar {
+    display:none!important;
+}
+body{
+    background-color: #000;
 }
 button{
     cursor: pointer;
@@ -10,50 +17,7 @@ button{
 p{
     color: white;
 }
-
-::-webkit-scrollbar {
-    display:none!important;
-}
-::-webkit-scrollbar-track {
-    background: #4a2727;
-}
-::-webkit-scrollbar-thumb {
-    background: #170303;
-}
-body{
-    background-color: #000;
-
-}   
-
-
-@keyframes rotate {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  .gradient {
-    --size: 750px;
-    --speed: 7s;
-    --easing: cubic-bezier(0.8, 0.2, 0.2, 0.8);
-    width: var(--size);
-    height: var(--size);
-    filter: blur(calc(var(--size) / 5));
-    background-image: linear-gradient(#4377ef, #7befd0);
-    animation: rotate var(--speed) var(--easing) alternate infinite;
-    border-radius: 30% 70% 70% 30%/30% 30% 70% 70%;
-  }
-  
-  .smooth-transition{
-    transition: width 5s ease, height 5s ease, filter 0.2s ease, background-image 5s ease, border-radius 5s ease;
-  }
-  @media (min-width: 720px) {
-    .gradient {
-      --size: 500px;
-    }
-  }
+/* */
 
 /*Nav Bar*/
 nav{
@@ -73,10 +37,10 @@ nav{
     color: white;
 }
 .search{
-width: 33%;
-height:55px;
-margin: 15px 15px 10px 15px;
-position: relative;
+    width: 33%;
+    height:55px;
+    margin: 15px 15px 10px 15px;
+    position: relative;
 }
 #search-bar{
     width: 100%;
@@ -108,17 +72,17 @@ input[type="search"]::-webkit-search-cancel-button {
     display:none;
 }
 #search-in-progress{
-width: auto;
-height: 40px;
-overflow:hidden;
-position:absolute;
-right: 10px;
-top: 5px;
-transform: scale(0);
-z-index: 1;
-aspect-ratio: 1/1;
+    width: auto;
+    height: 40px;
+    overflow:hidden;
+    position:absolute;
+    right: 10px;
+    top: 5px;
+    transform: scale(0);
+    z-index: 1;
+    aspect-ratio: 1/1;
 }
-
+/* */
 
 /*Clicked Photo*/
 #clicked-photo{
@@ -155,89 +119,106 @@ aspect-ratio: 1/1;
     transition: throw-upward 3s linear, bottom 2s linear;
 }
 @keyframes throw-upward{
-    20%{bottom: 37vh;}
-    30%{bottom: 42vh; transform: rotateZ(10deg);}
-    50%{bottom: -67vh; transform: rotateZ(0deg);}
+    20%{
+       bottom: 37vh;
+   }
+    30%{
+       bottom: 42vh;
+        transform: rotateZ(10deg);
+   }
+    50%{
+       bottom: -67vh;
+        transform: rotateZ(0deg);
+   }
 }
+/* */
 
+/*Panels*/
+#panels{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: -10px;
+}
+.left-panel, .right-panel{
+    flex: 1;
+    min-width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    place-items: center;
+    overflow:hidden;
+    border-radius: 10px;
+}
+.left-panel{
+    height: 100vh;
+    margin: 10px 5px 10px 10px;
+    background: #121212;
+    gap: 5%;
+}
+.right-panel{
+    margin: 10px 10px 10px 5px;
+    background-image: radial-gradient(circle at top, #fff, #121212 40%);
+    background-position: top center;
+}
+/* */
 
 /* Left Side Panel */
-.left-panell{
-    --color: #000;
-    background: linear-gradient(rgba(25, 31, 50, 0.2), rgb(4 8 20 / 0.01)),
-		rgb(4 8 20 / 0.8);
-	box-shadow: inset 0 0 0 1px rgb(200 200 220 / 0.16),
-		inset 0 0 5px -3px var(--color), inset 0 12px 48px 0 rgb(160 220 240 / 0.08),
-		inset 0 0 120px -100px var(--color);
-}
-.add-border-rotate{
-    position:relative;
-    border-radius: 20px;
-    overflow:hidden!important;
-}
-.add-border-rotate::after{
-    content:'';
-    background: conic-gradient(transparent 270deg, #fff 90%,transparent 100%);
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1/1;
-    position: absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
-    z-index: 0;
-    border-radius: 20px;
-    animation: border-rotate 4s linear infinite;
-}
-@keyframes border-rotate {
-   100%{transform: translate(-50%,-50%) rotate(360deg);}
-}
 #video{
-position: relative;
-transform: translateY(0%);
-object-fit: cover;
-width: 100%!important;
-height: auto!important;
-aspect-ratio: 48/45!important;
+    position: relative;
+    transform: translateY(0%);
+    object-fit: cover;
+    width: 100%!important;
+    height: auto!important;
+    aspect-ratio: 48/45!important;
 }
 canvas{
-position: relative;
-object-fit: cover;
-transform: translateY(-105%);
-width: 100%!important;
-height: auto!important;
-aspect-ratio: 48/45!important;
+    position: relative;
+    object-fit: cover;
+    transform: translateY(-105%);
+    width: 100%!important;
+    height: auto!important;
+    aspect-ratio: 48/45!important;
+}
+.gradient {
+    --size: 750px;
+    --speed: 7s;
+    --easing: cubic-bezier(0.8, 0.2, 0.2, 0.8);
+    width: var(--size);
+    height: var(--size);
+    filter: blur(calc(var(--size) / 5));
+    background-image: linear-gradient(#4377ef, #7befd0);
+    animation: rotate var(--speed) var(--easing) alternate infinite;
+    border-radius: 30% 70% 70% 30%/30% 30% 70% 70%;
+}
+.smooth-transition{
+    transition: width 5s ease, height 5s ease, filter 0.2s ease, background-image 5s ease, border-radius 5s ease;
+}
+@keyframes rotate {
+    0% {
+       transform: rotate(0deg);
+   }
+    100% {
+       transform: rotate(360deg);
+   }
+}
+@media (min-width: 720px) {
+    .gradient {
+       --size: 500px;
+   }
 }
 #video-container{
     border: 4px solid white;
     position:relative;
-}
-.start-sampling{
-position:absolute;
-top: 0%;
-left: 0%;
-width: 100%;
-height: 100%;
-display: none; 
-justify-content: center;
-place-items: center;
-background-color: transparent;
-box-shadow: inset 0px 0px 20px 10px rgba(0, 0, 0, 0.5);
-border: 5px solid rgba(0,0,0,0.01);
-border-radius: 30px;
-}
-.sample-button{
-border: 3px solid #aaa; outline: none; border-radius: 100px; width: 80%; height: auto; max-width: 440px; aspect-ratio: 16/4.5; display: none; gap: 4%; padding: 1% 5%; background-color: white; overflow: hidden; justify-content: center;
-place-items:center; 
-}        
-.emotions-roll{
-animation: tape 10s  ease-in infinite;
-animation-fill-mode: forwards;
-aspect-ratio: 1/1; flex: 1; background-repeat: repeat-y; background-size: cover; max-width: 200px; background-position: 0% 1%;
-}
-@keyframes tape{
-from{background-position: 0% 1%;}
-to{background-position: 0% 100%;}
+    width: 100%;
+    height: auto;
+    max-width: 450px;
+    z-index: 1;
+    border-radius: 20px;
+    aspect-ratio: 16/11;
+    overflow:hidden;
 }
 .camera-toggle{
     transform: scale(0);
@@ -267,40 +248,25 @@ to{background-position: 0% 100%;}
     font-weight: bold;
 }
 .note-glow{
-    /*background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent!important;*/
     text-transform:uppercase;
     text-decoration:underline;
     text-underline-offset: 10px;
-    /*animation: textShine 2s ease-in-out 3;*/
 }
-@keyframes textShine {
-    0% {
-        background-position: 0% 50%;
-    }
-    100% {
-        background-position: 100% 50%;
-    }
-}
-
 .recommend-button{
-    margin-top:  6%;
+    margin-top: 4%;
 }
 .recommend-button, .recommend-button>div{
-padding: -5%;
-width: 65vw;
-max-width: 280px;
-aspect-ratio: 16/4.5;
-background-color: #fff;/* rgb(6, 0, 26);*/
-justify-content:center;
-place-items:center;
-display:flex;
-border-radius: 50px;
-position: relative;
-cursor:pointer;
+    padding: -5%;
+    width: 65vw;
+    max-width: 280px;
+    aspect-ratio: 16/4.5;
+    background-color: #fff;/* rgb(6, 0, 26);*/
+    justify-content:center;
+    place-items:center;
+    display:flex;
+    border-radius: 50px;
+    position: relative;
+    cursor:pointer;
 }
 .recommend-button p{
     font-size: min(6.8vw,22px);
@@ -309,39 +275,37 @@ cursor:pointer;
     font-weight: bold;
 }
 @property --angle{
-syntax: "<angle>";
-initial-value: 0deg;
-inherits: false;
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
 }
-
 .recommend-button::after, .recommend-button::before{
-content: '';
-position: absolute;
-height: 100%;
-width: 100%;
-background-image: conic-gradient(from var(--angle), #ff4545, #00ff99, #006aff, #ff0095, #ff4545);
-top: 50%;
-left: 50%;
-translate: -50% -50%;
-z-index: -1;
-padding: 2px;
-border-radius: 50px;
-animation: 3s spin linear infinite;
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: conic-gradient(from var(--angle), #ff4545, #00ff99, #006aff, #ff0095, #ff4545);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -1;
+    padding: 2px;
+    border-radius: 50px;
+    animation: 3s spin linear infinite;
 }
-
 .recommend-button::before{
-filter: blur(1.5rem);
-opacity: 0.5;
+    filter: blur(1.5rem);
+    opacity: 0.5;
 }
 @keyframes spin{
-from{
---angle: 0deg;
+    from{
+        --angle: 0deg;
+   }
+    to{
+        --angle: 360deg;
+   }
 }
-to{
---angle: 360deg;
-}
-}
-
+/* */
 
 /*Right Side Panel*/
 .player{
@@ -349,7 +313,10 @@ to{
     padding: 2%;
     border-radius: 10px;
     overflow:hidden;
-    display: flex; flex-direction: column; justify-content: center; place-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    place-items: center;
     width: 65%;
     height: auto;
     backdrop-filter: blur(8px);
@@ -396,7 +363,7 @@ to{
     box-shadow: 0 0 0px #ddd;
 }
 .play-button:hover{
-    background-color:  white;
+    background-color: white;
     color:black;
     transform: translate(20%,-50%) scale(1.1);
 }
@@ -414,9 +381,8 @@ to{
     margin-bottom: 6%;
 }
 .slider:hover {
-        opacity: 1;
+    opacity: 1;
 }
-
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -432,7 +398,6 @@ to{
     background: #fff;
     cursor: pointer;
 }
-
 .similar-songs > div{
     display:flex;
     flex-direction: row;
@@ -509,3 +474,4 @@ to{
     background-color: rgb(255, 0, 0)!important;
     transition: transform 0.2s linear, background-color 0.1s linear!important;
 }
+/* */

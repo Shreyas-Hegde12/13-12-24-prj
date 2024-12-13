@@ -35,16 +35,16 @@ HAPPY = [
 
 
 CALM = [
-    ['Mayavi', 'a song to vibe'],
-    ['Sanjit Hegde Nee Nanage Allava','a calm melody'],
     ['Ninna Gungalli', 'a calm song to vibe'],
     ['Zara Zara - lofi', 'a calm lofi'],
     ['Hallu jenu', 'an old hit'],
     ['Pal Pal Dil Ke Paas (From Blackmail)','a Kishore Kumar melody'],
+    ['Munjaane Manjali', 'a song to vibe'],
+    ['Mayavi', 'a song to vibe'],
+    ['Sanjit Hegde Nee Nanage Allava','a calm melody'],
     ['Ninna Ninna Snehake', 'an old hit'],
     ['Neele Neele Ambar Par Male Version', 'an old hit'],
     ['Baani Gondu Elle', 'an old hit'],
-    ['Munjaane Manjali', 'a song to vibe'],
     ['Let me down slowly', 'a calm song to vibe'],
     ['Nee Sannihake Bandre', 'a calm melody'],
     ['samajavaragamana', 'a calm melody'],
