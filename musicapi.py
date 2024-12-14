@@ -80,7 +80,7 @@ async def fetch_song_url(videoid):
 def song_lyrics(videoid):
     watch_playlist = ytmusic.get_watch_playlist(videoId=videoid)
     browse_id = watch_playlist.get('lyrics')
+    if watch_playlist.get('lyrics') == None:
+        return "Oh you caught us. \n We still don't have lyrics for this one."
     lyrics = ytmusic.get_lyrics(browse_id)
-    if lyrics.get('lyrics') == 'None':
-        return 'Guess the lyrics yourself'
     return lyrics.get('lyrics')

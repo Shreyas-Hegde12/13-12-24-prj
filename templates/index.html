@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🥳Swing your mood and We'll sing a Song for you</title>
+    <title>All we can do is sing a song!</title>
     <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
     <link href="static/css/style.css" rel="stylesheet">
-    <link href="{{url_for('static', filename='images/favicon.png')}}" rel="icon" type="image/x-icon">
+    <link href="{{url_for('static', filename='images/favicon3.png')}}" rel="icon" type="image/x-icon">
     <script defer src="static/js/face-api.min.js"></script>
     <script defer src="static/js/musicjs.js"></script>
     <script defer src="static/js/faceapi.js"></script>
@@ -16,7 +16,7 @@
 <body>
     <nav>
         <!--Logo + Name-->
-        <p class="logo">WeAreMoody.</p>
+        <p class="logo" onclick="reload();">WeAreMoody.</p>
         <!--Search Bar-->
         <form class="search" onsubmit="event.preventDefault(); searchFeature();">
             <input type="search" id="search-bar" placeholder="Have a particular song in mind?">
@@ -49,7 +49,7 @@
         <!--Capture Area - Left Panel-->
         <div class="left-panel">
             <!--WebCam-->
-            <div name="video cam" style="width: 85%; display: flex; justify-content: center; place-items: center; max-width: 600px; height: auto; aspect-ratio: 16/11; position: relative;">
+            <div name="video cam" style="width: 85%; display: flex; justify-content: center; place-items: center; max-width: 580px; height: auto; aspect-ratio: 16/11; position: relative;">
                 <!--Container-->
                 <div class="gradient" id="video-container">
                     <video id="video" width="480px" height="450px" autoplay muted></video>
@@ -71,7 +71,6 @@
                     <p>Recommend a Song</p>
                 </div>
             </div>
-
             <!--Lyrics Tab-->
             <div class="lyrics-panel">
                 <p>Fetching Lyrics for you..</p>
@@ -103,7 +102,7 @@
                     <input type="range" onchange="updateSlider('update')" class="slider button" id="music-slider"
                         min="0" max="100" value="0" />
                 </div>
-            </div> <br>
+            </div> <br><br>
             <!-- Similar Songs Cards -->
             <p style="font-size: min(8vw, 30px); font-family: open sans; padding: 5% 0% 2% 0%;">Similar Songs</p>
             <div class="similar-songs"

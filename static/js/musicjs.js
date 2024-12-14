@@ -67,6 +67,7 @@ function setSong(data) {
             }
         });
     }
+    document.querySelector('.lyrics-panel p').innerText = 'Fetching lyrics for you..';
     const fallbackimg = 'static/images/transparent.png';
     document.querySelector('.player img').src = data.mainsong.coverart || fallbackimg;
     document.querySelector('.player img').setAttribute('data-videoid', data.mainsong.videoid);
@@ -236,10 +237,6 @@ async function searchFeature() {
     }).catch(error => {
         console.log("error from search: ", error);
     });
-}
-
-function snap() {
-    window.location.href = '#panels';
 }
 
 async function lyrics(){
