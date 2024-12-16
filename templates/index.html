@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All we can do is sing a song!</title>
+    <title>😃WeAreMoody.</title>
     <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
     <link href="static/css/style.css" rel="stylesheet">
-    <link href="{{url_for('static', filename='images/favicon3.png')}}" rel="icon" type="image/x-icon">
+    <link href="{{url_for('static', filename='images/favicon.png')}}" rel="icon" type="image/x-icon">
     <script defer src="static/js/face-api.min.js"></script>
     <script defer src="static/js/musicjs.js"></script>
     <script defer src="static/js/faceapi.js"></script>
@@ -16,7 +16,7 @@
 <body>
     <nav>
         <!--Logo + Name-->
-        <p class="logo" onclick="reload();">WeAreMoody.</p>
+        <div class="logo" onclick="reload();"></div>
         <!--Search Bar-->
         <form class="search" onsubmit="event.preventDefault(); searchFeature();">
             <input type="search" id="search-bar" placeholder="Have a particular song in mind?">
@@ -49,7 +49,7 @@
         <!--Capture Area - Left Panel-->
         <div class="left-panel">
             <!--WebCam-->
-            <div name="video cam" style="width: 85%; display: flex; justify-content: center; place-items: center; max-width: 580px; height: auto; aspect-ratio: 16/11; position: relative;">
+            <div name="video cam" style="width: 85%; display: flex; justify-content: center; place-items: center; max-width: 600px; height: auto; aspect-ratio: 16/11; position: relative;">
                 <!--Container-->
                 <div class="gradient" id="video-container">
                     <video id="video" width="480px" height="450px" autoplay muted></video>

@@ -29,18 +29,19 @@ nav{
 }
 .logo{
     position: absolute;
-    top: 3%;
+    top: 2.5%;
     left: 2%;
-    font-family: 'open sans';
-    font-size: min(8vw,26px);
-    font-weight: bolder;
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: #fff;
+    z-index: 100;
+    aspect-ratio: 1/0.7;
+    width: 80px;
+    height: auto;
+    border: 0px solid white;
     /*background-image: linear-gradient(45deg, aqua, blue, Magenta, red, orange, yellow, green, cyan, blue, violet, cyan, skyblue);
     background-size: 400% 400%;
     background-position: 100% 150%;*/
-    animation: animte 15s ease infinite;
+    background-image: url('/static/images/logo.png');
+    background-position: -580% -420%;
+    background-size: 620%;
     cursor:pointer;
 }
 @keyframes animat {
@@ -61,11 +62,10 @@ nav{
   }
 }
 .search{
-    width: 33%;
-    height:55px;
-    margin: 15px 15px 10px 15px;
-    position: relative;
-    display:block;
+width: 33%;
+height:55px;
+margin: 15px 15px 10px 15px;
+position: relative;
 }
 #search-bar{
     width: 100%;
@@ -75,7 +75,7 @@ nav{
     padding: 5px 10%;
     text-align: left;
     font-family: 'open sans';
-    font-size: 19px;
+    font-size: 20px;
     color: white;
     outline:0px;
     border: 2px solid #1e1e1e;
@@ -97,27 +97,27 @@ input[type="search"]::-webkit-search-cancel-button {
     display:none;
 }
 #search-in-progress{
-    width: auto;
-    height: 40px;
-    overflow:hidden;
-    position:absolute;
-    right: 10px;
-    top: 5px;
-    transform: scale(0);
-    z-index: 1;
-    aspect-ratio: 1/1;
+width: auto;
+height: 40px;
+overflow:hidden;
+position:absolute;
+right: 10px;
+top: 5px;
+transform: scale(0);
+z-index: 1;
+aspect-ratio: 1/1;
 }
 /* */
 
 /*Clicked Photo*/
 #clicked-photo{
     width: 50vw;
-    max-width: 500px;
+    max-width: 520px;
     height: auto;
     aspect-ratio: 16/12.5;
     position: fixed;
     bottom: -67vh;
-    left: 10vw;
+    left: 8.4vw;
     overflow: hidden;
     display:flex;
     z-index: 50;
@@ -140,22 +140,15 @@ input[type="search"]::-webkit-search-cancel-button {
     aspect-ratio: 16/13.5;
 }
 .clicked-photo-animation{
-    animation: throw-upward 3s ease-in-out 1;
-    transition: throw-upward 3s linear, bottom 2s linear;
+    animation: throw-upward 3s ease 1;
+    transition: throw-upward 3s ease, bottom 2s ease;
 }
 @keyframes throw-upward{
-    20%{
-       bottom: 40vh;
-   }
-    30%{
-       bottom: 43vh;
-        transform: rotateZ(10deg);
-   }
-    50%{
-       bottom: -67vh;
-        transform: rotateZ(0deg);
-   }
+    20%{bottom: 39vh;}
+    30%{bottom: 41vh; transform: rotateZ(10deg);}
+    50%{bottom: -67vh; transform: rotateZ(-5deg);}
 }
+
 /* */
 
 /*Panels*/
@@ -169,7 +162,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 .left-panel, .right-panel{
     flex: 1;
-    min-width: 450px;
+    min-width: 500px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -181,7 +174,7 @@ input[type="search"]::-webkit-search-cancel-button {
 .left-panel{
     height: 100vh;
     margin: 10px 5px 10px 10px;
-    background: #121212;
+    background: #1a1a1a;
     gap: 5%;
 }
 .right-panel{
@@ -242,7 +235,7 @@ canvas{
     height: auto;
     max-width: 450px;
     z-index: 1;
-    border-radius: 20px;
+    border-radius: 19px;
     aspect-ratio: 16/11;
     overflow:hidden;
 }
@@ -267,7 +260,7 @@ canvas{
 }
 #recommendation-note{
     text-align:center;
-    padding: 2%;
+    padding: 0%;
     font-size: 20px;
     font-family: 'open sans';
     color:white;
@@ -279,27 +272,25 @@ canvas{
     text-underline-offset: 10px;
 }
 .recommend-button{
-    margin: 3% 0 4% 0;
-   
+    margin:  5% 0 4% 0;
 }
 .recommend-button, .recommend-button>div{
-    padding: -5%;
-    width: 65vw;
-    max-width: 270px;
-    aspect-ratio: 16/4.5;
-    background-color: #fff;/* rgb(6, 0, 26);*/
-    justify-content:center;
-    place-items:center;
-    display:flex;
-    border-radius: 50px;
-    position: relative;
-    cursor:pointer;
+padding: -5%;
+width: 65vw;
+max-width: 260px;
+aspect-ratio: 16/4.5;
+background-color: #fff;/* rgb(6, 0, 26);*/
+justify-content:center;
+place-items:center;
+display:flex;
+border-radius: 50px;
+position: relative;
+cursor:pointer;
 }
 .recommend-button p{
     font-size: min(6.8vw,22px);
     font-family: 'open sans';
     color: #000;
-    font-weight: normal;
 }
 @property --angle{
     syntax: "<angle>";
@@ -360,10 +351,7 @@ canvas{
     padding: 2%;
     border-radius: 10px;
     overflow:hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    place-items: center;
+    display: flex; flex-direction: column; justify-content: center; place-items: center;
     width: 65%;
     max-width: 470px;
     height: auto;
@@ -372,7 +360,7 @@ canvas{
     box-shadow: 0 0 500px #444;
 }
 .player img{
-    margin: 4%;
+    margin: 5%;
     width: 90%;
     height: auto;
     aspect-ratio: 1/1;
@@ -464,7 +452,7 @@ canvas{
     transition: transform 0.2s linear;
 }
 .song-card:hover{
-    transform: scale(1.06);
+    transform: scale(1.1);
 }
 .thumb{
     aspect-ratio: 1/1;
